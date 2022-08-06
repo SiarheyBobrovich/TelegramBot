@@ -2,7 +2,7 @@
 *.class
 
 #Configuration files
-bot.yaml
+bot.yml
 
 # Technical packages
 .idea/**

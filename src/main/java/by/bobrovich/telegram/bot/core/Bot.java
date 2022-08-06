@@ -1,16 +1,19 @@
 package by.bobrovich.telegram.bot.core;
 
+import by.bobrovich.telegram.bot.service.YamlPropertySourceFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-@Component
-@PropertySource("bot.yaml")
+@Service
+@ConfigurationProperties(prefix = "yaml")
+@PropertySource(value = "classpath:bot.yml", factory = YamlPropertySourceFactory.class)
 public class Bot extends TelegramLongPollingBot {
 
     private final String name;
@@ -18,8 +21,8 @@ public class Bot extends TelegramLongPollingBot {
 
     private final MessageSender messageSender;
 
-    public Bot(@Value("bot.name") String name,
-               @Value("bot.token") String token,
+    public Bot(@Value("${bot.name}") String name,
+               @Value("${bot.token}") String token,
                MessageSender messageSender) {
         this.name = name;
         this.token = token;
