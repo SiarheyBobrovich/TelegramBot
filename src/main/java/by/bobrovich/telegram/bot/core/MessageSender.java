@@ -16,12 +16,11 @@ public class MessageSender implements IMessageSender {
     }
 
     @Override
-    public SendMessage sendMsg(Message message, String question) {
+    public SendMessage sendMsg(Message message, String text) {
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(message.getChatId())
                 .replyToMessageId(message.getMessageId())
-                .replyMarkup(keyboard.getReplyKeyboardMarkup())
-                .text(question)
+                .text(text)
                 .build();
 
         sendMessage.enableMarkdown(true);

@@ -1,12 +1,11 @@
 package by.bobrovich.telegram.bot.config;
 
+import by.bobrovich.telegram.bot.core.keyboard.KeyBoardNamingRow;
+import by.bobrovich.telegram.bot.core.keyboard.KeyboardName;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
-
-import java.util.List;
 
 @Configuration
 public class KeyboardConfig {
@@ -17,10 +16,19 @@ public class KeyboardConfig {
     }
 
     @Bean
-    public KeyboardRow firstKeyboardRow(List<KeyboardButton> buttons) {
-        KeyboardRow keyboardRow = new KeyboardRow();
+    public KeyBoardNamingRow settingRow() {
+        KeyBoardNamingRow keyboardRow = new KeyBoardNamingRow(KeyboardName.SETTING);
 
-        keyboardRow.addAll(buttons);
+        keyboardRow.add(minsk());
+        keyboardRow.add(brest());
+
+        return keyboardRow;
+    }
+
+    @Bean
+    public KeyBoardNamingRow helpRow() {
+        KeyBoardNamingRow keyboardRow = new KeyBoardNamingRow(KeyboardName.HELP);
+        keyboardRow.add(settingButton());
 
         return keyboardRow;
     }
@@ -31,7 +39,17 @@ public class KeyboardConfig {
     }
 
     @Bean
-    public KeyboardButton settingButtom() {
+    public KeyboardButton settingButton() {
         return new KeyboardButton("/setting");
+    }
+
+    @Bean
+    public KeyboardButton minsk() {
+        return new KeyboardButton("/Minsk");
+    }
+
+    @Bean
+    public KeyboardButton brest() {
+        return new KeyboardButton("/Brest");
     }
 }

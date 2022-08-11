@@ -1,5 +1,6 @@
 package by.bobrovich.telegram.bot.core;
 
+import by.bobrovich.telegram.bot.service.BotService;
 import by.bobrovich.telegram.bot.service.YamlPropertySourceFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -19,14 +20,14 @@ public class Bot extends TelegramLongPollingBot {
     private final String name;
     private final String token;
 
-    private final MessageSender messageSender;
+    private final BotService service;
 
     public Bot(@Value("${bot.name}") String name,
                @Value("${bot.token}") String token,
-               MessageSender messageSender) {
+               BotService service) {
         this.name = name;
         this.token = token;
-        this.messageSender = messageSender;
+        this.service = service;
     }
 
     @Override
@@ -37,29 +38,21 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
-        SendMessage sendMsg;
+
+        final SendMessage sendMsg;
         if (message != null && message.hasText()) {
-            switch (message.getText()) {
+            sendMsg = service.sendMsg(message);
 
-                case "/help":
-                    sendMsg = messageSender.sendMsg(message, "Чем могу помочь?");
-                    break;
+        }else {
+            sendMsg = null;
+        }
 
-                case "/setting":
-                    sendMsg = messageSender.sendMsg(message, "Что будем настраивать?");
-                    break;
+        try {
+            execute(sendMsg);
 
-                default:
-                    sendMsg = null;
-            }
-
-            try {
-                execute(sendMsg);
-
-            } catch (TelegramApiException e) {
-                System.err.println(e.getMessage());
-                throw new RuntimeException(e);
-            }
+        } catch (TelegramApiException e) {
+            System.err.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
