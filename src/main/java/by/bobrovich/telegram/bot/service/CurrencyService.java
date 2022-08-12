@@ -3,6 +3,7 @@ package by.bobrovich.telegram.bot.service;
 import by.bobrovich.telegram.bot.dto.CurrencyDto;
 import by.bobrovich.telegram.bot.dto.PageDtos;
 import by.bobrovich.telegram.bot.enums.Currency;
+import by.bobrovich.telegram.bot.utils.YamlPropertySourceFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

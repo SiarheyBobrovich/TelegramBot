@@ -43,7 +43,6 @@ public class KeyboardConfig {
 
         keyboardRow.add(currencyButton());
         keyboardRow.add(settingButton());
-        keyboardRow.add(menuButton());
 
         return keyboardRow;
     }

@@ -5,13 +5,18 @@ import by.bobrovich.telegram.bot.dto.PageDtos;
 import by.bobrovich.telegram.bot.enums.Currency;
 import by.bobrovich.telegram.bot.keyboard.Keyboard;
 import by.bobrovich.telegram.bot.keyboard.menu.KeyboardKeyName;
+import by.bobrovich.telegram.bot.utils.SendMessageUtil;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class BotService {
@@ -30,7 +35,16 @@ public class BotService {
     }
 
     public SendMessage sendMsg(Message message) {
-        KeyboardKeyName keyboardKeyName = KeyboardKeyName.of(message.getText());
+        String textFromUser = message.getText();
+
+        KeyboardKeyName keyboardKeyName;
+
+        try {
+            keyboardKeyName = KeyboardKeyName.of(textFromUser);
+
+        }catch (IllegalArgumentException e) {
+            keyboardKeyName = KeyboardKeyName.HELP;
+        }
 
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(message.getChatId())
@@ -49,24 +63,25 @@ public class BotService {
         String convert = null;
         Currency.Operation operation = null;
         Currency currency = null;
-        if (buttons.length < 1) {
 
-        }else {
+        SendMessage.SendMessageBuilder builder = SendMessageUtil.getDefaultSendMessageBuilder(
+                message.getMessage().getChatId(), message.getMessage().getMessageId()
+        );
+
+        try {
             operation = Currency.Operation.valueOf(buttons[0]);
             currency = Currency.valueOf(buttons[1]);
 
             PageDtos<CurrencyDto> currencies = currencyService.getCurrencies(currency, operation);
             convert = conversionService.convert(currencies.getContent(), String.class);
+
+            builder.text(operation.getCondition() + " " + currency.name() + ":\n " + convert);
+
+        }catch (IllegalArgumentException ignore) {
+            //add UserService
+            builder.text("Успешно!");
         }
 
-        SendMessage sendMessage = SendMessage.builder()
-                .chatId(message.getMessage().getChatId())
-                .replyToMessageId(message.getMessage().getMessageId())
-                .text(operation != null ? operation.getCondition() + " " + currency.name() + ":\n " + convert : convert)
-                .build();
-
-        sendMessage.enableMarkdown(true);
-
-        return sendMessage;
+        return builder.build();
     }
 }

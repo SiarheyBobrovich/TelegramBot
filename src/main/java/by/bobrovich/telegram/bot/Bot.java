@@ -1,7 +1,7 @@
 package by.bobrovich.telegram.bot;
 
 import by.bobrovich.telegram.bot.service.BotService;
-import by.bobrovich.telegram.bot.service.YamlPropertySourceFactory;
+import by.bobrovich.telegram.bot.utils.YamlPropertySourceFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
@@ -38,8 +38,8 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
-
         final SendMessage sendMsg;
+
         if (message != null && message.hasText()) {
             sendMsg = service.sendMsg(message);
 

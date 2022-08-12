@@ -1,7 +1,7 @@
 package by.bobrovich.telegram.bot.keyboard.query;
 
 import by.bobrovich.telegram.bot.keyboard.menu.KeyboardKeyName;
-import by.bobrovich.telegram.bot.service.YamlPropertySourceFactory;
+import by.bobrovich.telegram.bot.utils.YamlPropertySourceFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
