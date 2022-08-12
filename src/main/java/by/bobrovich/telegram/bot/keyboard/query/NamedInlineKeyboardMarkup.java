@@ -1,6 +1,6 @@
-package by.bobrovich.telegram.bot.core.keyboard.query;
+package by.bobrovich.telegram.bot.keyboard.query;
 
-import by.bobrovich.telegram.bot.core.keyboard.menu.KeyboardKeyName;
+import by.bobrovich.telegram.bot.keyboard.menu.KeyboardKeyName;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 

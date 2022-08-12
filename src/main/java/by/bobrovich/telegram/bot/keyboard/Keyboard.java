@@ -1,7 +1,7 @@
-package by.bobrovich.telegram.bot.core.keyboard;
+package by.bobrovich.telegram.bot.keyboard;
 
-import by.bobrovich.telegram.bot.core.keyboard.menu.NamedKeyBoardRow;
-import by.bobrovich.telegram.bot.core.keyboard.menu.KeyboardKeyName;
+import by.bobrovich.telegram.bot.keyboard.menu.NamedKeyBoardRow;
+import by.bobrovich.telegram.bot.keyboard.menu.KeyboardKeyName;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;

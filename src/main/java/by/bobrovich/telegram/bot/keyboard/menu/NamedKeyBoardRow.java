@@ -1,4 +1,4 @@
-package by.bobrovich.telegram.bot.core.keyboard.menu;
+package by.bobrovich.telegram.bot.keyboard.menu;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 

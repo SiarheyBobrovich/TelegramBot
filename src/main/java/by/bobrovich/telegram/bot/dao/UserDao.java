@@ -1,10 +1,9 @@
-package by.bobrovich.telegram.bot.core.dao;
+package by.bobrovich.telegram.bot.dao;
 
-import by.bobrovich.telegram.bot.core.entity.User;
+import by.bobrovich.telegram.bot.dao.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.Set;
 
 @Service
 public class UserDao {

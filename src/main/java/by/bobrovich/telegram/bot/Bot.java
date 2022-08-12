@@ -1,4 +1,4 @@
-package by.bobrovich.telegram.bot.core;
+package by.bobrovich.telegram.bot;
 
 import by.bobrovich.telegram.bot.service.BotService;
 import by.bobrovich.telegram.bot.service.YamlPropertySourceFactory;

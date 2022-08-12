@@ -1,4 +1,4 @@
-package by.bobrovich.telegram.bot.core.entity;
+package by.bobrovich.telegram.bot.dao.entity;
 
 public class User {
 

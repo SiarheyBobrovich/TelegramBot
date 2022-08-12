@@ -1,9 +1,9 @@
 package by.bobrovich.telegram.bot.service;
 
-import by.bobrovich.telegram.bot.core.dto.CurrencyDto;
-import by.bobrovich.telegram.bot.core.dto.PageDtos;
-import by.bobrovich.telegram.bot.core.keyboard.Keyboard;
-import by.bobrovich.telegram.bot.core.keyboard.menu.KeyboardKeyName;
+import by.bobrovich.telegram.bot.dto.CurrencyDto;
+import by.bobrovich.telegram.bot.dto.PageDtos;
+import by.bobrovich.telegram.bot.keyboard.Keyboard;
+import by.bobrovich.telegram.bot.keyboard.menu.KeyboardKeyName;
 import by.bobrovich.telegram.bot.enums.Currency;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package by.bobrovich.telegram.bot.service;
 
-import by.bobrovich.telegram.bot.core.dto.CurrencyDto;
-import by.bobrovich.telegram.bot.core.dto.PageDtos;
+import by.bobrovich.telegram.bot.dto.CurrencyDto;
+import by.bobrovich.telegram.bot.dto.PageDtos;
 import by.bobrovich.telegram.bot.enums.Currency;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

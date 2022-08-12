@@ -1,6 +1,6 @@
 package by.bobrovich.telegram.bot.converters;
 
-import by.bobrovich.telegram.bot.core.dto.CurrencyDto;
+import by.bobrovich.telegram.bot.dto.CurrencyDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
