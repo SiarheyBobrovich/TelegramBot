@@ -30,8 +30,13 @@ public class CurrencyService {
     }
 
     public PageDtos<CurrencyDto> getCurrencies(Currency currency, Currency.Operation operation) {
+
+        return getCurrenciesPageable(currency, operation, 0, 10);
+    }
+
+    public PageDtos<CurrencyDto> getCurrenciesPageable(Currency currency, Currency.Operation operation, long page, int size) {
         final PageDtos<CurrencyDto> dtos;
-        String forObject = template.getForObject(uri + currency.name() + "/" + operation.name(), String.class);
+        String forObject = template.getForObject(uri + currency.name() + "/" + operation.name() + "?page=" + page + "&size=" + size, String.class);
         ObjectReader objectReader = mapper.readerFor(new TypeReference<PageDtos<CurrencyDto>>(){});
 
         try {
