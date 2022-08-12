@@ -1,7 +1,7 @@
 package by.bobrovich.telegram.bot.config;
 
-import by.bobrovich.telegram.bot.keyboard.menu.NamedKeyBoardRow;
 import by.bobrovich.telegram.bot.keyboard.menu.KeyboardKeyName;
+import by.bobrovich.telegram.bot.keyboard.menu.NamedKeyBoardRow;
 import by.bobrovich.telegram.bot.keyboard.query.NamedInlineKeyboardMarkup;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
