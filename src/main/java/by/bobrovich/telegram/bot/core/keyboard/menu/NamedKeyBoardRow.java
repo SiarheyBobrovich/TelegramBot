@@ -1,27 +1,27 @@
-package by.bobrovich.telegram.bot.core.keyboard;
+package by.bobrovich.telegram.bot.core.keyboard.menu;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.Objects;
 
-public class KeyBoardNamingRow extends KeyboardRow {
+public class NamedKeyBoardRow extends KeyboardRow {
 
-    private final KeyboardName name;
+    private final KeyboardKeyName name;
 
-    public KeyBoardNamingRow(KeyboardName name) {
+    public NamedKeyBoardRow(KeyboardKeyName name) {
         this.name = name;
     }
 
-    public KeyboardName getName() {
+    public KeyboardKeyName getName() {
         return name;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof KeyBoardNamingRow)) return false;
+        if (!(o instanceof NamedKeyBoardRow)) return false;
         if (!super.equals(o)) return false;
-        KeyBoardNamingRow that = (KeyBoardNamingRow) o;
+        NamedKeyBoardRow that = (NamedKeyBoardRow) o;
         return name == that.name;
     }
 

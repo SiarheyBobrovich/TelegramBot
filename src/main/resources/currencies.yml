@@ -1,0 +1,8 @@
+# EXAMPLE: DATA=button
+currency:
+  BUY USD=продать USD;
+  SELL USD=купить USD;
+  BUY EURO=продать EURO;
+  SELL EURO=купить EURO;
+  BUY RUB=продать RUB;
+  SELL RUB=купить RUB;
