@@ -1,6 +1,6 @@
 package by.bobrovich.telegram.bot.config;
 
-import by.bobrovich.telegram.bot.core.keyboard.KeyboardName;
+import by.bobrovich.telegram.bot.core.keyboard.menu.KeyboardKeyName;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,11 +11,11 @@ import java.util.Map;
 public class MessageConfig {
 
     @Bean
-    public Map<KeyboardName, String> getMessages() {
-        KeyboardName[] values = KeyboardName.values();
-        Map<KeyboardName, String> messages = new EnumMap<>(KeyboardName.class);
+    public Map<KeyboardKeyName, String> getMessages() {
+        KeyboardKeyName[] values = KeyboardKeyName.values();
+        Map<KeyboardKeyName, String> messages = new EnumMap<>(KeyboardKeyName.class);
 
-        for (KeyboardName value : values) {
+        for (KeyboardKeyName value : values) {
             messages.put(value, value.getMessage());
         }
 

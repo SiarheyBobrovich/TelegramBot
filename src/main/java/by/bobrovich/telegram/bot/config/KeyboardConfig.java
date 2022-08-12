@@ -1,11 +1,17 @@
 package by.bobrovich.telegram.bot.config;
 
-import by.bobrovich.telegram.bot.core.keyboard.KeyBoardNamingRow;
-import by.bobrovich.telegram.bot.core.keyboard.KeyboardName;
+import by.bobrovich.telegram.bot.core.keyboard.menu.NamedKeyBoardRow;
+import by.bobrovich.telegram.bot.core.keyboard.menu.KeyboardKeyName;
+import by.bobrovich.telegram.bot.core.keyboard.query.NamedInlineKeyboardMarkup;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Configuration
 public class KeyboardConfig {
@@ -16,40 +22,63 @@ public class KeyboardConfig {
     }
 
     @Bean
-    public KeyBoardNamingRow settingRow() {
-        KeyBoardNamingRow keyboardRow = new KeyBoardNamingRow(KeyboardName.SETTING);
+    Map<KeyboardKeyName, InlineKeyboardMarkup> markupMap(List<NamedInlineKeyboardMarkup> list) {
+        final HashMap<KeyboardKeyName, InlineKeyboardMarkup> inlineKeyboardMarkupHashMap = new HashMap<>(list.size());
+        list.forEach(x -> inlineKeyboardMarkupHashMap.put(x.getName(), x));
 
-        keyboardRow.add(minsk());
-        keyboardRow.add(brest());
+        return inlineKeyboardMarkupHashMap;
+    }
+
+    @Bean
+    public NamedKeyBoardRow help() {
+        NamedKeyBoardRow keyboardRow = new NamedKeyBoardRow(KeyboardKeyName.HELP);
+        keyboardRow.add(menuButton());
 
         return keyboardRow;
     }
 
     @Bean
-    public KeyBoardNamingRow helpRow() {
-        KeyBoardNamingRow keyboardRow = new KeyBoardNamingRow(KeyboardName.HELP);
+    public NamedKeyBoardRow menu() {
+        NamedKeyBoardRow keyboardRow = new NamedKeyBoardRow(KeyboardKeyName.MENU);
+
+        keyboardRow.add(currencyButton());
         keyboardRow.add(settingButton());
+        keyboardRow.add(menuButton());
+
+        return keyboardRow;
+    }
+
+    @Bean
+    public NamedKeyBoardRow setting() {
+        NamedKeyBoardRow keyboardRow = new NamedKeyBoardRow(KeyboardKeyName.SETTING);
+        keyboardRow.add(cityButton());
+        keyboardRow.add(menuButton());
 
         return keyboardRow;
     }
 
     @Bean
     public KeyboardButton helpButton() {
-        return new KeyboardButton("/help");
+        return new KeyboardButton("help");
+    }
+
+    @Bean
+    public KeyboardButton menuButton() {
+        return new KeyboardButton("menu");
+    }
+
+    @Bean
+    public KeyboardButton cityButton() {
+        return new KeyboardButton("city");
+    }
+
+    @Bean
+    public KeyboardButton currencyButton() {
+        return new KeyboardButton("currency");
     }
 
     @Bean
     public KeyboardButton settingButton() {
-        return new KeyboardButton("/setting");
-    }
-
-    @Bean
-    public KeyboardButton minsk() {
-        return new KeyboardButton("/Minsk");
-    }
-
-    @Bean
-    public KeyboardButton brest() {
-        return new KeyboardButton("/Brest");
+        return new KeyboardButton("setting");
     }
 }
