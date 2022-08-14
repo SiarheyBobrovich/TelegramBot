@@ -8,6 +8,5 @@ public class ApplicationMain {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("by.bobrovich.telegram.bot");
         context.refresh();
-
     }
 }

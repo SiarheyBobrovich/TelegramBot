@@ -19,7 +19,6 @@ public class Bot extends TelegramLongPollingBot {
 
     private final String name;
     private final String token;
-
     private final BotService service;
 
     public Bot(@Value("${bot.name}") String name,
@@ -28,6 +27,7 @@ public class Bot extends TelegramLongPollingBot {
         this.name = name;
         this.token = token;
         this.service = service;
+        this.getOptions().setMaxThreads(6);
     }
 
     @Override
