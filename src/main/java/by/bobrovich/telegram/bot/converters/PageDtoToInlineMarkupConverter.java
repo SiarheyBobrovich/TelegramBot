@@ -14,26 +14,29 @@ import java.util.List;
 public class PageDtoToInlineMarkupConverter {
 
     public InlineKeyboardMarkup convert(PageDtos<CurrencyDto> source, Currency currency, Currency.Operation operation) {
-        String callBackData = operation.name() + " " + currency.name();
+        String callBackData = "CURRENCY " + operation.name() + " " + currency.name();
         List<InlineKeyboardButton> buttons = new ArrayList<>();
 
         if (!source.isFirst()) {
             buttons.add(InlineKeyboardButton.builder()
                     .text("back")
                     .callbackData(callBackData + " " + (source.getPage() - 1))
-                    .build());
+                    .build()
+            );
         }
 
         buttons.add(InlineKeyboardButton.builder()
                 .text(source.getPage() + 1 + "/" + source.getTotalPages())
                 .callbackData("ignore")
-                .build());
+                .build()
+        );
 
         if (!source.isLast()) {
             buttons.add(InlineKeyboardButton.builder()
                     .text("next")
                     .callbackData(callBackData + " " + (source.getPage() + 1))
-                    .build());
+                    .build()
+            );
         }
 
         return new InlineKeyboardMarkup(List.of(buttons));

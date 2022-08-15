@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,16 +37,10 @@ public class CurrencyService {
 
     public PageDtos<CurrencyDto> getCurrenciesPageable(Currency currency, Currency.Operation operation, long page, int size) {
         final PageDtos<CurrencyDto> dtos;
-        String forObject = template.getForObject(uri + currency.name() + "/" + operation.name() + "?page=" + page + "&size=" + size, String.class);
-        ObjectReader objectReader = mapper.readerFor(new TypeReference<PageDtos<CurrencyDto>>(){});
+        PageDtos forObject = template.getForObject(uri + currency.name() + "/" + operation.name() + "?page=" + page + "&size=" + size, PageDtos.class);
+        PageDtos<CurrencyDto> currencyDtoPageDtos = mapper.convertValue(forObject, new TypeReference<>() {});
 
-        try {
-            dtos = objectReader.readValue(forObject);
-        }catch (JsonProcessingException e) {
-            throw new RuntimeException("Проблема с парсингом сервиса");
-        }
-
-        return dtos;
+        return currencyDtoPageDtos;
     }
 
 }

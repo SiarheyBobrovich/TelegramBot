@@ -1,19 +1,25 @@
 package by.bobrovich.telegram.bot.dto.user;
 
+import by.bobrovich.telegram.bot.dto.user.enums.Status;
+
 import java.io.Serializable;
 
 public class SaveUser implements Serializable {
 
-    private final String username;
-    private final String password;
-    private final Long chatId;
-    private final String city;
+    private String username;
+    private String password;
+    private final long chatId;
+    private String city;
+    private int size;
+    private Status status;
 
-    public SaveUser(String username, String password, Long chatId, String city) {
+    public SaveUser(String username, String password, long chatId, String city, int size, Status status) {
         this.username = username;
         this.password = password;
         this.chatId = chatId;
         this.city = city;
+        this.size = size;
+        this.status = status;
     }
 
     public String getUsername() {
@@ -22,12 +28,37 @@ public class SaveUser implements Serializable {
     public String getPassword() {
         return password;
     }
-    public Long getChatId() {
+    public long getChatId() {
         return chatId;
     }
-
     public String getCity() {
         return city;
+    }
+    public int getSize() {
+        return size;
+    }
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public static Builder builder() {
@@ -37,8 +68,10 @@ public class SaveUser implements Serializable {
     public static class Builder {
         private String username;
         private String password;
-        private Long chatId;
+        private long chatId;
         private String city;
+        private int size;
+        private Status status;
 
         public Builder setCity(String city) {
             this.city = city;
@@ -55,8 +88,18 @@ public class SaveUser implements Serializable {
             return this;
         }
 
-        public Builder setChatId(Long chatId) {
+        public Builder setChatId(long chatId) {
             this.chatId = chatId;
+            return this;
+        }
+
+        public Builder setSize(int size) {
+            this.size = size;
+            return this;
+        }
+
+        public Builder setStatus(Status status) {
+            this.status = status;
             return this;
         }
 
@@ -65,7 +108,9 @@ public class SaveUser implements Serializable {
                     username,
                     password,
                     chatId,
-                    city
+                    city,
+                    size,
+                    status
             );
         }
     }

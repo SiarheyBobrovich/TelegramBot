@@ -8,6 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -37,14 +39,15 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        Message message = update.getMessage();
+        final Message message = update.getMessage();
         final SendMessage sendMsg;
 
         if (message != null && message.hasText()) {
             sendMsg = service.sendMsg(message);
 
         }else if (update.hasCallbackQuery()){
-            sendMsg = service.sendMsg(update.getCallbackQuery());
+            final CallbackQuery callbackQuery = update.getCallbackQuery();
+            sendMsg = service.sendMsg(callbackQuery);
 
         }else {
             sendMsg = null;
@@ -54,7 +57,6 @@ public class Bot extends TelegramLongPollingBot {
             execute(sendMsg);
 
         } catch (TelegramApiException e) {
-            System.err.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }

@@ -13,11 +13,12 @@ public class ListCurrencyDtoToStringConverter implements Converter<List<Currency
     public String convert(List<CurrencyDto> source) {
         final StringBuilder builder = new StringBuilder();
 
-        source.forEach(currencyDto -> builder.append(currencyDto.getAddress())
-                .append(": ")
+        source.forEach(currencyDto -> builder
                 .append("<strong>")
                 .append(currencyDto.getExchangeRate())
                 .append("</strong>")
+                .append(" : ")
+                .append(currencyDto.getAddress())
                 .append("\n"));
 
         return builder.toString();
