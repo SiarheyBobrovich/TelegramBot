@@ -42,10 +42,9 @@ public class BotService implements IBotService {
     @Override
     public SendMessage sendMsg(Message message) {
         final Long chatId = message.getChatId();
-        final User user;
 
         try {
-            user = userService.load(chatId);
+            userService.load(chatId);
 
         }catch (LoadUserException e) {
             return SendMessage.builder()
@@ -103,9 +102,9 @@ public class BotService implements IBotService {
             PageDtos<CurrencyDto> currencies;
 
             if (buttons.length == 4) {
-                currencies = currencyService.getCurrenciesPageable(currency, operation, Long.parseLong(buttons[3]), user.getSize());
+                currencies = currencyService.getCurrenciesPageable(currency, operation, user.getCity(), Long.parseLong(buttons[3]), user.getSize());
             }else {
-                currencies = currencyService.getCurrenciesPageable(currency, operation, 0L, user.getSize());
+                currencies = currencyService.getCurrenciesPageable(currency, operation, user.getCity(), 0L, user.getSize());
             }
 
             convert = conversionService.convert(currencies.getContent(), String.class);

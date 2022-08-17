@@ -24,6 +24,25 @@
         <spring.boot.version>2.7.1</spring.boot.version>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <!-- Default Active Without Assign Parameter -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profileActive>prod</profileActive>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
 
         <dependency>

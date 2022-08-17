@@ -1,3 +1,0 @@
-currency:
-  service:
-    uri: http://localhost/v1/api/office/

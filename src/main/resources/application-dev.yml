@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile:
+        - dev
+currency:
+  service:
+    uri: http://localhost/v1/api/office/
+user:
+  service:
+    registration:
+      http://localhost:81/api/v1/users/registration
+    about:
+      http://localhost:81/api/v1/users/me/
+    update:
+      http://localhost:81/api/v1/users/update/
