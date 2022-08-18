@@ -8,9 +8,11 @@ bot.yml
 **/parsers/*Parser.class
 
 # Technical packages
-.idea/**
+**/.idea/**
 /target/**
 *.iml
+**/.mvn/**
+
 
 # Log file
 *.log

@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    username: postgres
+    password: 172143
+    url: jdbc:postgresql://localhost:5432/finance-service?currentSchema=finance
+    driver-class-name: org.postgresql.Driver
+server:
+  port: 80

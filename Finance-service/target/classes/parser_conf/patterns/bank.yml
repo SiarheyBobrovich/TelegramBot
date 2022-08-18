@@ -1,0 +1,7 @@
+bank:
+  pattern: Отделения\s[аА-яЯ-]+
+office:
+  replacer: (<.+?>)
+  address: <div class="address">
+exchange_rates:
+  pattern: \>\"?(\d+\.?\d*)\<
