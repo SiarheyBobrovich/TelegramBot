@@ -4,6 +4,9 @@
 #Configuration files
 bot.yml
 
+#Parsers
+**/parsers/*Parser.class
+
 # Technical packages
 .idea/**
 /target/**

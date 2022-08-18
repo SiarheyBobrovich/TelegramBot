@@ -1,7 +1,0 @@
-#Example:
-#row1: Currencies,Settings,Cities
-#row2: Menu,Settings
-#row3: ...
-settings:
-  Город,Размер страницы;
-  Меню

@@ -1,8 +1,0 @@
-# EXAMPLE:
-# row1: DATA=button;                1 element
-# row1: DATA=button,DATA=button;    2 elements
-#...
-currency:
-  продать USD=CURRENCY BUY USD,купить USD=CURRENCY SELL USD;
-  продать EURO=CURRENCY BUY EURO,купить EURO=CURRENCY SELL EURO;
-  продать RUB=CURRENCY BUY RUB,купить RUB=CURRENCY SELL RUB;
