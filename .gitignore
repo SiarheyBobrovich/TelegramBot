@@ -9,7 +9,7 @@ bot.yml
 
 # Technical packages
 **/.idea/**
-/target/**
+**/target/**
 *.iml
 **/.mvn/**
 
