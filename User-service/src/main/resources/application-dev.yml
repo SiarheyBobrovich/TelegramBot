@@ -1,0 +1,22 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  datasource:
+    username: # Пользователь
+    password: # Пороль
+    url: jdbc:postgresql://localhost:5432/bot-user?currentSchema=security
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 81
