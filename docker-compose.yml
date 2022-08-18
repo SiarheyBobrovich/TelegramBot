@@ -1,0 +1,35 @@
+version: '3.5'
+services:
+  db:
+    build: postgresql
+    image: bot_postgresql:1.0.0
+    restart: always
+    environment:
+      POSTGRES_USER: # Имя пользователя дб
+      POSTGRES_PASSWORD: # Пороль
+    volumes:
+      - /docker-entrypoint-initdb.d
+    networks:
+      - bot_ntwrk
+
+  finance-service:
+    build: finance-service
+    image: bot_finance-service:1.0.0
+    networks:
+      - bot_ntwrk
+
+  user-service:
+      build: user-service
+      image: bot_user-service:1.0.0
+      networks:
+        - bot_ntwrk
+
+  telegram-bot:
+    build: TelegramBot
+    image: bot_telegram-bot:1.0.0
+    networks:
+      - bot_ntwrk
+
+networks:
+    bot_ntwrk:
+      name: bot_ntwrk
