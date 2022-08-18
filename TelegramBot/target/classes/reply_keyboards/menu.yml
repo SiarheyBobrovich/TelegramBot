@@ -1,6 +1,0 @@
-#Example:
-#row1: Currencies,Settings,Cities
-#row2: Menu,Settings
-#row3: ...
-menu:
-  Валюта,Настройки;
