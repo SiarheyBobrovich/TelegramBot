@@ -13,7 +13,6 @@ bot.yml
 *.iml
 **/.mvn/**
 
-
 # Log file
 *.log
 
