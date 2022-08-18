@@ -1,0 +1,7 @@
+# EXAMPLE:
+# row1: button=DATA,button=DATA;    2elements
+# row1: button=DATA;                1element
+size:
+  10=SIZE 10,15=SIZE 15;
+  20=SIZE 20,25=SIZE 25;
+  30=SIZE 30,40=SIZE 40;

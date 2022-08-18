@@ -1,0 +1,5 @@
+# EXAMPLE:
+# row1: button=DATA,button=DATA;    2elements
+# row1: button=DATA;                1element
+city:
+  Минск=CITY MINSK,Брест=CITY BREST;
