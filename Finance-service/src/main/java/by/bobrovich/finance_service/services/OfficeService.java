@@ -81,7 +81,7 @@ public class OfficeService implements ISaveInterface<Office>, IReadService<Offic
         Page<Office> offices = officeRepository.findByCity(city, pageable);
 
         if (offices.isEmpty()) {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("city: " + city + "pageNumber: " + pageable.getPageNumber() + "size: " +  pageable.getPageSize());
         }
 
         return offices;
