@@ -16,7 +16,6 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.OptimisticLockException;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -74,11 +73,8 @@ public class UserPersonalService implements IUserPersonalService {
     }
 
     @Override
-    public ResponseUser getByChatId(long chatId) {
-        return conversionService.convert(
-                userDao.findByChatId(chatId)
-                        .orElseThrow(EntityNotFoundException::new), ResponseUser.class
-        );
+    public User getByChatId(long chatId) {
+        return userDao.findByChatId(chatId).orElseThrow(EntityNotFoundException::new);
     }
 
     private void setAuthoritiesFromDao(User user) {

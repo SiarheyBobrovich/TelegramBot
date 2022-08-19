@@ -3,6 +3,7 @@
 
 #Configuration files
 bot.yml
+jwt.properties
 
 #Parsers
 **/parsers/*Parser.class

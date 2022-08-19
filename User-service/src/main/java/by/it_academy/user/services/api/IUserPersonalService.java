@@ -1,5 +1,6 @@
 package by.it_academy.user.services.api;
 
+import by.it_academy.user.dao.entity.User;
 import by.it_academy.user.dto.request.UserRegistrationDto;
 import by.it_academy.user.dto.request.UserUpdateDto;
 import by.it_academy.user.dto.response.ResponseUser;
@@ -28,7 +29,5 @@ public interface IUserPersonalService {
      * @param chatId User's chatId
      * @return Information about
      */
-    ResponseUser getByChatId(@Valid long chatId);
-
-
+    User getByChatId(@Valid long chatId);
 }
