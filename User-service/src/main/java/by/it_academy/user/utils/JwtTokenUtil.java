@@ -4,11 +4,12 @@ import by.it_academy.user.exceptions.PropertiesNotFoundException;
 import io.jsonwebtoken.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
+import static io.jsonwebtoken.lang.Classes.getResourceAsStream;
 
 public class JwtTokenUtil {
 
@@ -19,7 +20,7 @@ public class JwtTokenUtil {
     static {
         Properties properties = new Properties();
         try {
-            properties.load(new FileReader("jwt.properties"));
+            properties.load(getResourceAsStream("jwt.properties"));
 
         } catch (IOException e) {
             throw new PropertiesNotFoundException("Проверьте jwt.properties файл");
