@@ -3,3 +3,4 @@
 # row1: button=DATA;                1element
 city:
   Минск=CITY MINSK,Брест=CITY BREST;
+  Витебск=CITY VITEBSK;

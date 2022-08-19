@@ -11,18 +11,19 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest(classes = {MyFinBrestParser.class, RestTemplate.class})
-class MyFinBrestParserTest {
+
+@SpringBootTest(classes = {MyFinVitebskParser.class, RestTemplate.class})
+class MyFinVitebskParserTest {
 
     @Autowired
     private IMyFinParser parser;
 
     @Test
-    void getBrestBanks() {
-        List<Bank> brest = parser.getBanks();
+    void getVitebskBanks() {
+        List<Bank> vitebsk = parser.getBanks();
 
-        for (Bank bank : brest) {
-            assertEquals("BREST", bank.getCity());
+        for (Bank bank : vitebsk) {
+            assertEquals("VITEBSK", bank.getCity());
             Set<Office> offices = bank.getOffices();
 
             assertFalse(offices.isEmpty());

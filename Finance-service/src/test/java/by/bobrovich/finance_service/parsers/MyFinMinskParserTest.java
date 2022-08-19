@@ -1,6 +1,7 @@
 package by.bobrovich.finance_service.parsers;
 
 import by.bobrovich.finance_service.dao.entity.*;
+import by.bobrovich.finance_service.parsers.api.IMyFinParser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MyFinMinskParserTest {
 
     @Autowired
-    private MyFinMinskParser parser;
+    private IMyFinParser parser;
 
     @Test
     void getMinskBanks() {
