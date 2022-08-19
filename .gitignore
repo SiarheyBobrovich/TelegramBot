@@ -12,6 +12,7 @@ bot.yml
 **/target/**
 *.iml
 **/.mvn/**
+/pgadmin/config/servers.json
 
 # Log file
 *.log

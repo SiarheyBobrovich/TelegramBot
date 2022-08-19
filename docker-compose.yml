@@ -12,6 +12,18 @@ services:
     networks:
       - bot_ntwrk
 
+  pgadmin:
+    build: pgadmin
+    image: bot_pgadmin:1.0.0
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: #Username
+      PGADMIN_DEFAULT_PASSWORD: #Pass
+    ports:
+      - "82:80"
+    networks:
+      - bot_ntwrk
+
   finance-service:
     build: finance-service
     image: bot_finance-service:1.0.0
