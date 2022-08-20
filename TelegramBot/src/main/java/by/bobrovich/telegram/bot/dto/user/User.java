@@ -17,6 +17,8 @@ public class User {
     private final Status status;
     private final LocalDateTime dtUpdate;
 
+    private String jwtToken;
+
     public User(String username,
                 long chatId,
                 String city,
@@ -59,6 +61,14 @@ public class User {
 
     public LocalDateTime getDtUpdate() {
         return dtUpdate;
+    }
+
+    public String getJwtToken() {
+        return jwtToken;
+    }
+
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
     }
 
     public static Builder builder() {

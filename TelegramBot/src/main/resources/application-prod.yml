@@ -9,3 +9,6 @@ user:
       http://user-service/api/v1/users/me/
     update:
       http://user-service/api/v1/users/update/
+admin:
+  user:
+    count: http://user-service/v1/api/administration/user/count

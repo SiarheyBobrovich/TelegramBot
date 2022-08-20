@@ -14,3 +14,6 @@ user:
       http://localhost:81/api/v1/users/me/
     update:
       http://localhost:81/api/v1/users/update/
+admin:
+  user:
+    count: http://localhost:81/v1/api/administration/user/count
