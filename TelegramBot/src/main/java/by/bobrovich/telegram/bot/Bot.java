@@ -1,18 +1,17 @@
 package by.bobrovich.telegram.bot;
 
-import by.bobrovich.telegram.bot.service.BotService;
+import by.bobrovich.telegram.bot.adapter.api.IBotMessagesAdapter;
 import by.bobrovich.telegram.bot.utils.YamlPropertySourceFactory;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.concurrent.ExecutorService;
 
 @Service
 @ConfigurationProperties(prefix = "yaml")
@@ -21,15 +20,17 @@ public class Bot extends TelegramLongPollingBot {
 
     private final String name;
     private final String token;
-    private final BotService service;
+    private final IBotMessagesAdapter adapter;
+    private final ExecutorService executorService;
 
     public Bot(@Value("${bot.name}") String name,
                @Value("${bot.token}") String token,
-               BotService service) {
+               IBotMessagesAdapter adapter,
+               ExecutorService executorService) {
         this.name = name;
         this.token = token;
-        this.service = service;
-        this.getOptions().setMaxThreads(6);
+        this.adapter = adapter;
+        this.executorService = executorService;
     }
 
     @Override
@@ -38,26 +39,15 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     @Override
-    public void onUpdateReceived(Update update) {
-        final Message message = update.getMessage();
-        final SendMessage sendMsg;
-
-        if (message != null && message.hasText()) {
-            sendMsg = service.sendMsg(message);
+    public void onUpdateReceived(final Update update) {
+        if (update.hasMessage()) {
+            executorService.execute(() -> adapter.sendMsg(update.getMessage(), this));
 
         }else if (update.hasCallbackQuery()){
-            final CallbackQuery callbackQuery = update.getCallbackQuery();
-            sendMsg = service.sendMsg(callbackQuery);
+            executorService.execute(() -> adapter.sendMsg(update.getCallbackQuery(), this));
 
         }else {
-            sendMsg = null;
-        }
-
-        try {
-            execute(sendMsg);
-
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            LogFactory.getLog(this.getClass()).error(update);
         }
     }
 

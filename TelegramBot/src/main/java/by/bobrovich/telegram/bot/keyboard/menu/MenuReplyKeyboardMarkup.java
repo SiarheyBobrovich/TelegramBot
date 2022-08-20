@@ -17,6 +17,6 @@ public class MenuReplyKeyboardMarkup extends NamedReplyKeyboardMarkup {
 
     @Override
     public String getMessage() {
-        return "Вы находитесь в меню";
+        return "Меню";
     }
 }

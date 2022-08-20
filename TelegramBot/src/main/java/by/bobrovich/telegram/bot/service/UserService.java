@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -66,6 +67,9 @@ public class UserService implements IUserService {
                 throw new LoadUserException("Сервис временно недоступен.");
             }
         }
+
+        final User user = forEntity.getBody();
+        user.setJwtToken(forEntity.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0));
 
         return forEntity.getBody();
     }
