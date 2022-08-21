@@ -3,6 +3,7 @@ package by.bobrovich.finance_service.thread;
 import by.bobrovich.finance_service.dao.entity.Bank;
 import by.bobrovich.finance_service.parsers.api.IMyFinParser;
 import by.bobrovich.finance_service.services.api.IFinanceService;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +25,8 @@ public class FinanceUpdaterThread implements Runnable, AutoCloseable {
             List<Bank> banks = parser.getBanks();
             service.saveAll(banks);
 
-            System.err.println("completed: " + parser);
+            LogFactory.getLog(parser.getClass()).info("Completed");
+
             try {
                 TimeUnit.HOURS.sleep(1);
 
@@ -36,7 +38,7 @@ public class FinanceUpdaterThread implements Runnable, AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         this.isInterrupted = true;
     }
 }

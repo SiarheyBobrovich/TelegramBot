@@ -22,6 +22,9 @@ class MyFinVitebskParserTest {
     void getVitebskBanks() {
         List<Bank> vitebsk = parser.getBanks();
 
+        assertNotNull(vitebsk);
+        assertFalse(vitebsk.isEmpty());
+
         for (Bank bank : vitebsk) {
             assertEquals("VITEBSK", bank.getCity());
             Set<Office> offices = bank.getOffices();

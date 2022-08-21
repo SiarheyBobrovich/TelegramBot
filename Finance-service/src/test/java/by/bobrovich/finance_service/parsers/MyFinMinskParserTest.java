@@ -12,24 +12,32 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = {MyFinMinskParser.class, RestTemplate.class})
+@SpringBootTest(classes = {
+        MyFinMinskParser.class, RestTemplate.class
+})
 class MyFinMinskParserTest {
 
     @Autowired
     private IMyFinParser parser;
 
     @Test
-    void getMinskBanks() {
-        List<Bank> bankList = parser.getBanks();
+    void getBrestBanks() {
+        List<Bank> minskBanks = parser.getBanks();
 
-        for (Bank bank : bankList) {
+        assertNotNull(minskBanks);
+        assertFalse(minskBanks.isEmpty());
+        assertEquals(22, minskBanks.size());
+
+        for (Bank bank : minskBanks) {
             assertEquals("MINSK", bank.getCity());
             Set<Office> offices = bank.getOffices();
 
             assertFalse(offices.isEmpty());
 
+
             offices.forEach(office -> {
                 assertNotNull(office.getAddress());
+
                 Usd usd = office.getUsd();
                 Euro euro = office.getEuro();
                 Rub rub = office.getRub();
@@ -37,6 +45,10 @@ class MyFinMinskParserTest {
                 assertNotNull(usd);
                 assertNotNull(euro);
                 assertNotNull(rub);
+
+                assertTrue(usd.getBuy() < usd.getSell());
+                assertTrue(euro.getBuy() < euro.getSell());
+                assertTrue(rub.getBuy() < rub.getSell());
             });
         }
     }

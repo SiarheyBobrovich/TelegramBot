@@ -22,6 +22,9 @@ class MyFinMogilevParserTest {
     void getVitebskBanks() {
         List<Bank> mofilevBanks = parser.getBanks();
 
+        assertNotNull(mofilevBanks);
+        assertFalse(mofilevBanks.isEmpty());
+
         for (Bank bank : mofilevBanks) {
             assertEquals("MOGILEV", bank.getCity());
             Set<Office> offices = bank.getOffices();

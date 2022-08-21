@@ -23,6 +23,9 @@ class MyFinGomelParserTest {
     void getBrestBanks() {
         List<Bank> gomelBanks = parser.getBanks();
 
+        assertNotNull(gomelBanks);
+        assertFalse(gomelBanks.isEmpty());
+
         for (Bank bank : gomelBanks) {
             assertEquals("GOMEL", bank.getCity());
             Set<Office> offices = bank.getOffices();
