@@ -7,6 +7,7 @@ import by.bobrovich.telegram.bot.exceptions.SaveUserException;
 import by.bobrovich.telegram.bot.service.api.IUserService;
 import by.bobrovich.telegram.bot.utils.LocalDateTimeUtil;
 import by.bobrovich.telegram.bot.utils.YamlPropertySourceFactory;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
@@ -62,9 +63,10 @@ public class UserService implements IUserService {
 
                 forEntity = template.getForEntity(me + chatId, User.class);
 
-            }catch (SaveUserException exception) {
-                System.err.println(exception.getMessage());
-                throw new LoadUserException("Сервис временно недоступен.");
+            }catch (SaveUserException | RestClientException exception) {
+                LogFactory.getLog(this.getClass()).error(exception.getMessage());
+
+                throw new LoadUserException("Сервис временно недоступен");
             }
         }
 

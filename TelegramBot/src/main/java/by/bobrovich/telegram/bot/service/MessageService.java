@@ -24,20 +24,20 @@ public class MessageService implements IMessageService {
                         final AbsSender absSender,
                         final String... arg) {
         SendMessage.SendMessageBuilder messageBuilder = SendMessage.builder()
-                .parseMode(ParseMode.MARKDOWNV2)
-                .chatId(chatId);
+                .chatId(chatId)
+                .parseMode(ParseMode.MARKDOWNV2);
+
+        final String textFromUser = arg[0];
 
         try {
             userService.load(chatId);
+            messageBuilder.text(keyboardsContainer.getMessage(textFromUser));
+            messageBuilder.replyMarkup(keyboardsContainer.getReplyKeyboardMarkup(arg[0]));
+
 
         }catch (LoadUserException e) {
             messageBuilder.text(e.getMessage());
         }
-
-        final String textFromUser = arg[0];
-
-        messageBuilder.replyMarkup(keyboardsContainer.getReplyKeyboardMarkup(arg[0]))
-                .text(keyboardsContainer.getMessage(textFromUser));
 
         execute(absSender, messageBuilder.build());
     }
